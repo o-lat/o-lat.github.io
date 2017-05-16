@@ -1,0 +1,57 @@
+<script>
+function plus_zoom(){
+	document.body.style.zoom = "130%";
+	document.getElementById('plus').style.height="38px";
+	document.getElementById('plus').style.width="38px";
+	document.getElementById('minus').style.height="38px";
+	document.getElementById('minus').style.width="38px";
+	document.getElementById('plus').style.marginRight="8px";
+}
+function minus_zoom(){
+	document.body.style.zoom = "100%";
+	document.getElementById('plus').style.height="50px";
+	document.getElementById('plus').style.width="50px";
+	document.getElementById('minus').style.height="50px";
+	document.getElementById('minus').style.width="50px";
+	document.getElementById('plus').style.marginRight="10px";
+}
+</script>
+<style>
+body {
+	width: 670px;
+	margin: 0;
+}
+#plus:hover{
+cursor:pointer;
+opacity:0.5;
+}
+#plus{
+opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+#minus:hover{
+cursor:pointer;
+opacity:0.5;
+}
+#minus{
+opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+area, shape {
+	outline:none;
+}
+</style>
+</head>
+<body style="margin:0;">
+<img onClick="plus_zoom(this.id)" src="assets/plus.png" style="margin-right:10px;" width="50" height="50" id="plus" alt=""/><img onClick="minus_zoom(this.id)" id="minus" src="assets/minus.png" width="50" height="50" alt=""/>
+<img src="map_toilets.png" border="0" width="670" height="402" orgWidth="800" orgHeight="402" usemap="#_map" alt="" />
+<map name="_map" id="_map">
+	<area shape="rect" coords="621,173,639,193" href="#" onClick="alert('Toilets');">
+	<area shape="rect" coords="247,22,266,40" href="#" onClick="alert('Toilets');">
+</map>
+</body>
+</html>

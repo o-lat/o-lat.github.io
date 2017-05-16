@@ -1,0 +1,4 @@
+- Promotions
+- Accessibility (disabled parking and lifts)
+- Ctrl + F to search
+- Tables (to show shops in text format)

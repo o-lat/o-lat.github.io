@@ -1,0 +1,61 @@
+<body>
+    <div id="magDiv" style="float:right; display:inline-block; clear:left;">
+        <img id="zoomInImage" src="zoom-in.png" alt="zoom in" width="50" height="50"/>
+        <img id="zoomOutImage" src="zoom-out.png" alt="zoom out" width="50" height="50"/>
+    </div>
+    <div id="zoomDiv">
+    <table width="100%" border="0">
+        <tr>
+            <td width="7%">&nbsp;</td>
+            <td width="17%">&nbsp;</td>
+            <td width="53%">&nbsp;</td>
+            <td width="11%">&nbsp;</td>
+            <td width="12%">&nbsp;</td>
+            This section needs to go at the bottom of the document before the end body section.
+    </table>
+    <script>
+        //The range of zooms for the document.
+        var zoomRange = ["50%", "75%", "100%", "125%", "150%"];
+        var zoomDivEle = document.getElementById('zoomDiv');
+        
+        SetUpZoom();
+        
+        function SetUpZoom()
+        {
+        	//Set the page zoom level
+        	zoomDivEle.style.zoom = "100%";
+        
+        	//Get the page zoom image buttons 
+        	var zoomInEle = document.getElementById('zoomInImage');
+        	var zoomOutEle = document.getElementById('zoomOutImage');
+        
+        	//Add a click event to each image button
+        	zoomInEle.addEventListener('click', DoZoomIn);
+        	zoomOutEle.addEventListener('click', DoZoomOut);
+        }
+        
+        function DoZoomIn()
+        {
+        	
+        	//Check what the current zoom value is for the page
+        	var currentZoom = zoomDivEle.style.zoom;
+        	
+        	
+        	var i = zoomRange.indexOf(currentZoom);
+        	if( i == (zoomRange.length - 1))
+        		currentZoom = zoomRange[i];
+        else
+        	currentZoom = zoomRange[i+1];
+        
+        zoomDivEle.style.zoom = currentZoom;
+        	
+        }
+        
+        function DoZoomOut()
+        {
+        	var zoomDivEle = document.getElementById('zoomDiv');
+        	zoomDivEle.style.zoom = "75%";
+        }
+        
+    </script>
+</body>

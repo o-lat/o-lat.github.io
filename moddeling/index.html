@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<title>Moddeling</title>
+<style>
+body {
+	margin: 0;
+	margin-top:50px;
+	font-family:Arial, sans-serif;
+	background-color:#000;
+	text-align:center;
+}
+input {
+	background: #fff;
+	border:1px solid #fff;
+	border-bottom:1px solid #C7C7C7;
+	outline:none;
+	font-size:16px;
+	padding-top:8px;
+	padding-bottom:8px;
+	padding-left:15px;
+	padding-right:15px;
+	margin-bottom:0px;
+	width:267px;
+}
+textarea {
+	background: #fff;
+	border:1px solid #fff;
+	outline:none;
+	font-size:16px;
+	padding-top:8px;
+	padding-bottom:8px;
+	padding-left:15px;
+	width:267px;
+	min-width:267px;
+	max-width:267px;
+	max-height:500px;
+	padding-right:15px;
+}
+.btn {
+	width:147px;
+	border:none;
+}
+.btn_cont {
+	width:300px;
+	margin:0;
+}
+</style>
+</head>
+<body>
+<form action="mail.php" method="POST">
+<input type="text" name="name" placeholder="Name"><br>
+<input type="email" name="email" placeholder="Email"><br>
+<textarea name="message" rows="8" cols="25"></textarea><br>
+<center>
+<div class="btn_cont">
+<input type="submit" value="Send" class="btn">
+<input type="reset" value="Clear" class="btn">
+</div>
+</center>
+</form> 
+</body>
+</html>
