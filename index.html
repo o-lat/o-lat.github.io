@@ -7,6 +7,16 @@
             window.location = "upgrade_browser.html"
         </script>
         <![endif]-->
+        <script>
+            function e() {
+                var q = confirm('Would you like to go to the new webiste?')
+                if (q = true){
+                    location = "/new";
+                } else {
+                    //Do nothing
+                }
+            }
+        </script>
         <title>Omar Latreche</title>
         <link rel="icon" type="image/png" href="assets/icon.png" />
         <link href="assets/style.css" rel="stylesheet" type="text/css">
@@ -18,7 +28,7 @@
         <meta name="revisit-after" content="10 days">
         <!-- Omar Latreche, Apps, Games -->
     </head>
-    <body>
+    <body onload="e()">
         <div class="page">
             <div id="menu">
                 <ul>
