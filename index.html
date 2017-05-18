@@ -9,12 +9,19 @@
         <![endif]-->
         <script>
             function e() {
-                var q = confirm('Would you like to go to the new webiste?')
-                if (q == true){
-                    window.location = "/new";
+                if(document.cookie.indexOf("new_site=") >= 0) {
+                    console.log(getCookie('new_site'));
                 } else {
-                    //Do nothing
+                    var q = confirm('Would you like to go to the new webiste?');
+                    if (q == true){
+                        window.location = "/new";
+                        document.cookie = "new_site=true";
+                    } else {
+                        //Do nothing
+                        document.cookie = "new_site=false"
+                    }
                 }
+                
             }
         </script>
         <title>Omar Latreche</title>
