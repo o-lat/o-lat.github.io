@@ -8,6 +8,7 @@
         </script>
         <![endif]-->
         <script>
+            var cookieVar = getCookie('new_site');
             function getCookie(cname) {
                 var name = cname + "=";
                 var decodedCookie = decodeURIComponent(document.cookie);
@@ -24,7 +25,6 @@
                 return "";
             }
             function e() {
-                var cookieVar = getCookie('new_site');
                 if(cookieVar != '') {
                     if(cookieVar == 'true') {
                         window.locaiton = "/new";
