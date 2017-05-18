@@ -26,14 +26,18 @@
             function e() {
                 var cookieVar = getCookie('new_site');
                 if(cookieVar != '') {
-                    console.log(cookieVar);
+                    if(getCookie == 'true') {
+                        window.locaiton = "/new";
+                    } else {
+                        // Do nothing
+                    }
                 } else {
                     var q = confirm('Would you like to go to the new webiste?');
                     if (q == true){
                         window.location = "/new";
                         document.cookie = "new_site=true";
                     } else {
-                        //Do nothing
+                        // Do nothing
                         document.cookie = "new_site=false"
                     }
                 }
