@@ -9,8 +9,9 @@
         <![endif]-->
         <script>
             function e() {
-                if(document.cookie.indexOf("new_site=") >= 0) {
-                    console.log(getCookie('new_site'));
+                var cookieVar = getCookie('new_site');
+                if(cookieVar != '') {
+                    console.log(cookieVar);
                 } else {
                     var q = confirm('Would you like to go to the new webiste?');
                     if (q == true){
