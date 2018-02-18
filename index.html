@@ -1,73 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta name="viewport" content="width=480, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
-        <title>AMAP Shopping Centre Map</title>
         <!--[if lte IE 9]>
         <script type="text/javascript">
             alert("You are using an outdated browser. Redirecting you to a page where you can upgrade your browser...")
-            window.location = "../upgrade_browser.html"
+            window.location = "upgrade_browser.html"
         </script>
         <![endif]-->
-        <link href="fonts.css" rel="stylesheet" type="text/css">
-        <link href="style.css" rel="stylesheet" type="text/css">
-        <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-        
+        <script>
+            var cookieVar = getCookie('new_site');
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            function e() {
+                if(cookieVar != '') {
+                    if(cookieVar == 'true') {
+                        window.location = "/new";
+                    } else {
+                        // Do nothing
+                    }
+                } else {
+                    var q = confirm('Would you like to go to the new webiste?');
+                    if (q == true){
+                        window.location = "/new";
+                        document.cookie = "new_site=true";
+                    } else {
+                        // Do nothing
+                        document.cookie = "new_site=false"
+                    }
+                }
+                
+            }
+        </script>
+        <title>Omar Latreche</title>
+        <link rel="icon" type="image/png" href="assets/icon.png" />
+        <link href="assets/style.css" rel="stylesheet" type="text/css">
+        <link href="btec/fonts.css" rel="stylesheet" type="text/css">
+        <meta name="description" content="Omar's website with all of his apps, games and websites." />
+        <meta name="keywords" content="Omar, Latreche, Omar Latreche, Games, Apps, Websites, Aurum, Digital Assistant, Online Assistant, Virtual Assistant" />
+        <meta name="author" content="metatags generator">
+        <meta name="robots" content="index, follow">
+        <meta name="revisit-after" content="10 days">
+        <!-- Omar Latreche, Apps, Games -->
     </head>
-    <body onLoad="check_chrome();">
-    	<div id="error_msg">Please use Google Chrome to use this website.</div>
-        <div id="page">
-            <div class="wrap">
-                <div class="title_cont">
-                    <span class="title_main">Welcome to AMAP Shopping Centre</span><br>
-                </div>
-                <center>
-                    <div class="main_cont" id="main_cont">
-                        <div class="menu_cont">
-                            <ul>
-                                <li onclick="reset_f(this.id)" id="reset_btn">Reset map</li>
-                                <li onclick="resturants_f(this.id)" id="resturants">Food shops</li>
-                                <li onclick="clothing_f(this.id)" id="clothing_btn">Clothing shops</li>
-                                <li onclick="toilets_f(this.id)" id="toilets_btn">Toilets</li>
-                                <li onclick="banks_f(this.id)" id="banks_btn">Banks</li>
-                                <li onclick="other_f(this.id)" id="other_btn">Other</li>
-                                <li onclick="expand_menu(this.id)" id="expand_btn">&#x25BC;</li>
-                            </ul>
-                            <a href="info.html" alt="Info">
-                                <div class="info">
-                                    <img src="assets/question_icon.png" alt="Info" width="49" height="49" style="margin-left: 10px;">
-                                </div>
-                            </a>
-                            <div class="ul_sub" style="display:none" id="sub_menu">
-                                <div class="li_sub" onClick="parking_f(this.id)">Parking</div>
-                                <div class="li_sub" onClick="emergency_exit_f(this.id)">Emergency Exits</div>
-                                <a href="special_events.html"><div class="li_sub" id="special_events">Special Events</div></a>
-                                <a href="directory.html"><div class="li_sub">Directory</div></a>
-                                <a href="promotions.html"><div class="li_sub">Promotions</div></a>
-                                <div class="seperator">&nbsp;</div>
-                                <div class="li_sub" onclick="close_menu(this.id)">&#x25B2;</div>
-                            </div>
-                        </div>
-                    </div>
-                </center>
+    <body onload="e()">
+        <div class="page">
+            <div id="menu">
+                <ul>
+                    <a href="index.html"><li><u>Home</u></li></a>
+                    <a href="about.html"><li>About</li></a>
+                    <li>
+                        Portfolio
+                        <ul>
+                            <a href="aurum"><li>Aurum</li></a>
+                            <a href="art.html"><li>Art</li></a>
+                            <a href="apps.html"><li>Apps</li></a>
+                            <li class="sub_ul">
+                                BTEC Computing
+                                <ul>
+                                    <a href="btec"><li>AMAP Shopping Center</li></a>
+                                </ul>
+                    		</li>
+                        </ul>
+                    </li>
+                    <a href="contact.html">
+                        <li>Contact</li>
+                    </a>
+                    </li>
+                </ul>
             </div>
             <center>
-                <div class="cont">
-                    <br>
-                    <span class="title">Map of the shopping center:</span><br>
-                    <div class="map_cont" id="map_cont">
-                        <iframe src="map.html" id="map" width="670px" height="500px" class="map_frame"></iframe>
+                <div class="title_cont">
+                    <div id="logo_index">
+                        <img src="assets/logo.png" width="122" height="120" alt=""/>
                     </div>
-                    <center>
-                        <div class="footer">
-                            <span class="enlarge_text">Do you have reading difficulties? </span><span id="enlarge" onClick="enlarge_f(this.id)" class="link">Enlarge text</span>
-                        </div>
-                    </center>
+                    <div id="main_header">
+                        <span class="main_text">Omar <br /> Latreche</span>
+                        <br />
+                        <span class="sub_text">Web design, apps, art.</span>
+                    </div>
                 </div>
             </center>
         </div>
-		<script src="assets/script.js"></script>
     </body>
-</html>
+</html>	
