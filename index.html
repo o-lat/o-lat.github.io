@@ -1,49 +1,19 @@
 <!doctype html>
 <html>
     <head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" rel="stylesheet">
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+		<script src="assets/script.js"></script>
         <!--[if lte IE 9]>
         <script type="text/javascript">
             alert("You are using an outdated browser. Redirecting you to a page where you can upgrade your browser...")
             window.location = "upgrade_browser.html"
         </script>
         <![endif]-->
-        <script>
-            var cookieVar = getCookie('new_site');
-            function getCookie(cname) {
-                var name = cname + "=";
-                var decodedCookie = decodeURIComponent(document.cookie);
-                var ca = decodedCookie.split(';');
-                for(var i = 0; i <ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-            function e() {
-                if(cookieVar != '') {
-                    if(cookieVar == 'true') {
-                        window.location = "/new";
-                    } else {
-                        // Do nothing
-                    }
-                } else {
-                    var q = confirm('Would you like to go to the new webiste?');
-                    if (q == true){
-                        window.location = "/new";
-                        document.cookie = "new_site=true";
-                    } else {
-                        // Do nothing
-                        document.cookie = "new_site=false"
-                    }
-                }
-                
-            }
-        </script>
         <title>Omar Latreche</title>
         <link rel="icon" type="image/png" href="assets/icon.png" />
         <link href="assets/style.css" rel="stylesheet" type="text/css">
@@ -55,7 +25,7 @@
         <meta name="revisit-after" content="10 days">
         <!-- Omar Latreche, Apps, Games -->
     </head>
-    <body onload="e()">
+    <body>
         <div class="page">
             <div id="menu">
                 <ul>
