@@ -1,6 +1,8 @@
-// JavaScript Document
+// JS
 
-// Detect mobile browser (exlude tablets)
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-	window.location = "http://omarlatreche.tk/aurum/mobile_error.html";
-}
+$(document).ready(function(){
+    // Detect mobile browser (exclude tablets)
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        window.location = "https://play.google.com/store/apps/details?id=com.omarlatreche.aurum";
+    }
+});
