@@ -2,7 +2,7 @@ $(document).ready(function(){
     if($.cookie('new-site-opened') == null){
         $.confirm({
             title: 'New Site',
-            content: 'Would you like to switch to the new site?',
+            content: "Would you like to switch to the new site? Won't ask again",
             type: 'orange',
             icon: 'fa fa-warning',
             onClose: function(){
