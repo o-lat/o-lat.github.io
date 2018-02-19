@@ -323,7 +323,11 @@ function command() {
 			outputElement.innerHTML = "Please replace 'www.' with 'http://' or 'https://' or remove 'www.' if the textbox already contains 'http://' or 'https://'.";
 		}
 		else if (t.match(regex)) {
-			window.open(srch, '_blank');
+            if (srch.indexOf('http://') != -1 || srch.indexOf('https://') != -1) {
+                window.open(srch, '_blank');
+            } else {
+                window.open('http://' + srch, '_blank');
+            }
 		}
 		else if (srch.indexOf('your fat') != -1) {
 			outputElement.innerHTML = 'So is your mum.';
