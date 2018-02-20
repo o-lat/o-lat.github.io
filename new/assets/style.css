@@ -26,10 +26,10 @@ body {
     background:#FCC101;
 }
 .home .menu {
-    width:570px;
+    width:830px;
     position:relative;
     min-width:0;
-    height:68px;
+    height:88px;
     margin:auto;
     border:15px solid #000;
     -webkit-box-shadow: none;
@@ -40,6 +40,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    border-radius:60px;
 }
 
 a {
@@ -55,10 +56,10 @@ a {
     list-style: none;
 }
 .home ul li {
-    font: bold 40px/38px 'bebas_neuebold', sans-serif;
+    font: bold 60px/58px 'bebas_neuebold', sans-serif;
 }
 .home ul li:hover {
-    font: bold 46px/33px 'bebas_neuebold', sans-serif;
+    font: bold 66px/53px 'bebas_neuebold', sans-serif;
     border-bottom:5px solid #000;
     text-shadow: 0 -1px 0 #FFF;
     color:#000;
