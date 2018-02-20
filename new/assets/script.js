@@ -12,8 +12,7 @@ $(document).ready(function(){
     } else {
         $.cookie('old-layout','0');
     }
-    $('#toggle_layout').click(function(){
-        console.log('click');
+    $(document).on('click', '#toggle_layout', function() {
         if ($.cookie('old-layout') == '0'){
             $.cookie('old-layout', '1');
             $(document.body).removeClass('home');
