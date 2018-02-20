@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $.cookie.defaults = {path: '/', expires:365};
+    
     if($.cookie('new-site-opened') == null){
         $.confirm({
             title: 'New Site',
