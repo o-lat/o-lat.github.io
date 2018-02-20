@@ -6,6 +6,7 @@ $(document).ready(function(){
     if ($.cookie('old-layout') == '1'){
         $(document.body).removeClass('home');
         $('.wrap').css('display','block');
+        $('.footer').html('<p>If you prefer the new layout, you can <a href="#" id="toggle_layout" class="link">upgrade</a></p>');
     } else if ($.cookie('old-layout') == '0'){
         // nothing
     } else {

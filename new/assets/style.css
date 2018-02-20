@@ -43,11 +43,20 @@ body {
     border-radius:60px;
 }
 .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background:#ddd;
+}
+.home .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background:none;
 }
 .home .link {
     color:#000;
