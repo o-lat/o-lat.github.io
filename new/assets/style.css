@@ -42,7 +42,20 @@ body {
     right: 0;
     border-radius:60px;
 }
-
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+.home .link {
+    color:#000;
+    font-weight:bold;
+}
+.home .link:focus{
+    text-decoration:underline;
+}
 a {
     text-decoration: none;
     outline: none;
