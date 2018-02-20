@@ -1,6 +1,11 @@
 $(document).ready(function(){
     $.cookie.defaults = {path: '/', expires:365};
     
+    var path_url = window.location.pathname;
+    var page = path_url.substr(0, path_url.lastIndexOf('/'));
+    var redirect_link = 'new/' + page;
+    
+    
     if($.cookie('new-site-opened') == null){
         $.confirm({
             title: 'New Site',
@@ -15,7 +20,7 @@ $(document).ready(function(){
                     text: 'Yes',
                     btnClass: 'btn-orange',
                     action: function(){
-                        window.location = 'new/';
+                        window.location = redirect_link;
                         $.cookie('new-site', '1', {expires: 365});
                     }
                 },
@@ -30,7 +35,7 @@ $(document).ready(function(){
         });
     } else if($.cookie('new-site-opened') == '1') {
         if($.cookie('new-site') == '1'){
-            window.location = 'new/'
+            window.location = redirect_link;
         } else if($.cookie('new-site') == '0') {
             // nothing
         } else {
