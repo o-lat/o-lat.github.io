@@ -2,12 +2,8 @@ $(document).ready(function(){
     $.cookie.defaults = {path: '/', expires:365};
     
     var path_url = window.location.pathname;
-    console.log(path_url);
     var page = path_url.split('/').pop();
-    console.log(page);
     var redirect_link = 'new/' + page;
-    console.log(redirect_link);
-    
     
     if($.cookie('new-site-opened') == null){
         $.confirm({
