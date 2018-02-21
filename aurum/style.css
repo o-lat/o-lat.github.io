@@ -239,6 +239,9 @@ li a:hover{
     color: #fff;
     font-family:sans-serif;
 }
+.output .weather {
+    margin-top:10px;
+}
 .weather ul li {
     background: transparent;
     display:block;
@@ -246,4 +249,18 @@ li a:hover{
 .weather ul li:hover{
     background:transparent;
     cursor:default;
+}
+.container_custom {
+    text-align:center;
+    display:table;
+    margin:auto;
+    width:577px;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.output p {
+    margin-bottom:0;
 }

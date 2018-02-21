@@ -177,7 +177,27 @@ function weather(){
     if (navigator.geolocation) {
         var pos = navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        $.alert("Couldn't get your location");
+        $.confirm({
+            title: 'Error',
+            content: "Unable to get your location to show the weather. What would you like to do?",
+            type: 'red',
+            icon: 'fas fa-exclamation-triangle',
+            buttons: {
+                confirm: {
+                    text: 'Search Google for weather',
+                    btnClass: 'btn-red',
+                    action: function(){
+                        window.open('https://www.google.co.uk/#q=weather' + '_blank');
+                    }
+                },
+                cancel: {
+                    text: "Do nothing",
+                    action: function(){
+                        this.close();
+                    }
+                }
+            }
+        });
     }
 
     function showPosition(position) {
@@ -192,7 +212,7 @@ function weather(){
                 }).done(function(data) {
                     var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
                     var country = data.results[3].address_components[6].long_name;
-                    $('#output').html('Here is the weather for ' + city_region + '...<br><br><div class="weather"></div>');
+                    $('#output').html('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
                     var weather = $('.weather').flatWeatherPlugin({
                         location: city_region,
                         country: country,
@@ -205,7 +225,27 @@ function weather(){
                     self.close();
                 }).fail(function(xhr, status, error) {
                     self.close();
-                    $.alert('Error while getting location data');
+                    $.confirm({
+                        title: 'Error',
+                        content: "Unable to get your location to show the weather. What would you like to do?",
+                        type: 'red',
+                        icon: 'fas fa-exclamation-triangle',
+                        buttons: {
+                            confirm: {
+                                text: 'Search Google for weather',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    window.open('https://www.google.co.uk/#q=weather' + '_blank');
+                                }
+                            },
+                            cancel: {
+                                text: "Do nothing",
+                                action: function(){
+                                    this.close();
+                                }
+                            }
+                        }
+                    });
                     console.log('error: ' + xhr.status)
                     console.log('description: ' + xhr.error);
                 });
