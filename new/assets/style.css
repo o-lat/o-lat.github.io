@@ -5,7 +5,7 @@ body {
 	margin: 0;
 	font-family: Arial, sans-serif;
 	background-image: url(bg.jpg);
-	min-width: 500px;
+	min-width: 200px;
 }
 * {
 	-webkit-font-smoothing: antialiased;
@@ -27,7 +27,6 @@ body {
 }
 .home .menu {
     width:830px;
-    position:relative;
     min-width:0;
     height:88px;
     margin:auto;
@@ -272,4 +271,56 @@ ul li:hover ul {
 }
 .picture:hover {
 	opacity:0.6;
+}
+@media only screen and (max-width: 870px) {
+    .home .menu {
+        user-select:none;
+    }
+    .home ul li {
+        display:inline-block;
+        font: bold 60px/58px 'bebas_neuebold', sans-serif;
+    }
+    .home ul li:hover {
+        font: bold 60px/58px 'bebas_neuebold', sans-serif;
+        border-bottom:none;
+        text-shadow:none;
+        color:#000;
+        background:#fff;
+    }
+    .home ul li ul {
+        z-index:1000;
+        top:72px;
+    }
+    .home ul li ul li {
+        display:block;
+    }
+    .home .menu {
+        width:calc(100% - 50px);
+        height:fit-content;
+        border-radius:0;
+    }
+    .home ul li:hover ul {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .home ul li:focus ul {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+    .home ul li ul li:hover {
+        font: bold 22px/18px 'bebas_neuebold', sans-serif;
+        border-bottom:none;
+        background: #000;
+        color: #fff;
+        text-shadow:none;
+    }
+    .home ul li ul li:focus {
+        font: bold 22px/18px 'bebas_neuebold', sans-serif;
+        border-bottom:none;
+        background: #666;
+        color: #fff;
+        text-shadow:none;
+    }
 }
