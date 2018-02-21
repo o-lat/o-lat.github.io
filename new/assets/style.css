@@ -314,6 +314,7 @@ ul li:hover ul {
     }
     .home ul li ul li {
         display:block;
+        width:189px;
     }
     .home .menu {
         width:calc(100% - 50px);
