@@ -173,6 +173,65 @@ function getResponseRude() {
     var sec = now.getSeconds();
     document.getElementById('output').innerHTML = ar[sec % 20];
 }
+function weather(){
+    if (navigator.geolocation) {
+        var pos = navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        $.alert("Couldn't get your location");
+    }
+
+    function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        
+        $.confirm({
+            content: function() {
+                var self = this;
+                return $.ajax({
+                    url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + '51.6021467' + ',' + '0.2268894999999702' + '&key=AIzaSyBkwjbTjEuDLYe1Xdah9X4F4ztqvoHHLWM'
+                }).done(function(data) {
+                    var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
+                    var country = data.results[3].address_components[6].long_name;
+                    
+                    $('#output').html('Here is the weather for ' + city_region + '...<br><br><div class="weather"></div>');
+                    
+                    var weather = $('.weather').flatWeatherPlugin({
+                        location: city_region,
+                        country: country,
+                        api: 'yahoo',
+                        displayCityNameOnly: true,
+                        timeformat: '12',
+                        view: 'today',
+                        units: 'auto',
+                    });
+                    
+                    /*$.dialog({
+                        columnClass: 'col-md-5 col-md-offset-3',
+                        title: 'Here is the weather...',
+                        content: '<div class="weather"></div>',
+                        onOpen: function(){
+                            var weather = $('.weather').flatWeatherPlugin({
+                                location: city_region,
+                                country: country,
+                                api: 'yahoo',
+                                displayCityNameOnly: true,
+                                timeformat: '12',
+                                view: 'today',
+                                units: 'auto',
+                            });
+                        }
+                    });*/
+                    self.close();
+                }).fail(function(xhr, status, error) {
+                    self.close();
+                    $.alert('Error while getting location data');
+                    console.log('error: ' + xhr.status)
+                    console.log('description: ' + xhr.error);
+                });
+            }
+        });
+    }
+}
 function response() {
     var srchVar = document.getElementById("srch");
     var srch = srchVar.value;
@@ -211,35 +270,11 @@ function response() {
                 srch.indexOf('are you a female') != -1 || srch.indexOf('are you a girl') != -1 || srch.indexOf('are you a boy') != -1) 
                 {
         outputElement.innerHTML = "I am neither male or female. I am a computer program designed to help people.";
-    } else if (srch.indexOf('what') != -1 || srch.indexOf('when') != -1 || srch.indexOf('where') != -1 || srch.indexOf('why') != -1 || 
-                srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
-                srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
-                {
-        $.confirm({
-            title: 'Search Google?',
-            content: "That looks like a question, what would you like to do?",
-            type: 'orange',
-            icon: 'fa fa-warning',
-            buttons: {
-                confirm: {
-                    text: 'Search Google',
-                    btnClass: 'btn-orange',
-                    action: function(){
-                        window.open('https://www.google.co.uk/#q=' + srch, '_blank');
-                    }
-                },
-                cancel: {
-                    text: "I don't want an answer",
-                    action: function(){
-                        this.close();
-                    }
-                }
-            }
-        });
     } else if (srch === 'okay aurum') {
         outputElement.innerHTML = 'Hello! How can I help you?';
     } else if (srch.indexOf('weather') != -1) {
-        window.open('https://www.google.co.uk/#q=weather', '_blank');
+        //window.open('https://www.google.co.uk/#q=weather', '_blank');
+        weather();
     } else if (srch.indexOf('www') != -1) {
         outputElement.innerHTML = "Please replace 'www.' with 'http://' or 'https://' or remove 'www.' if the textbox already contains 'http://' or 'https://'.";
     } else if (t.match(regex)) {
@@ -278,6 +313,31 @@ function response() {
         outputElement.innerHTML = "Don't be racist!";
     } else if (srch.indexOf('nigga') != -1) {
         outputElement.innerHTML = "Don't be racist!";
+    } else if (srch.indexOf('what') != -1 || srch.indexOf('when') != -1 || srch.indexOf('where') != -1 || srch.indexOf('why') != -1 || 
+                srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
+                srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
+                {
+        $.confirm({
+            title: 'Search Google?',
+            content: "That looks like a question, what would you like to do?",
+            type: 'orange',
+            icon: 'fa fa-warning',
+            buttons: {
+                confirm: {
+                    text: 'Search Google',
+                    btnClass: 'btn-orange',
+                    action: function(){
+                        window.open('https://www.google.co.uk/#q=' + srch, '_blank');
+                    }
+                },
+                cancel: {
+                    text: "I don't want an answer",
+                    action: function(){
+                        this.close();
+                    }
+                }
+            }
+        });
     }
     // 18+ Content END
     else {

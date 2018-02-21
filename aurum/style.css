@@ -230,3 +230,20 @@ li a:hover{
 .active{
     text-decoration:underline;
 }
+.weather {
+    width: 100%;
+    height:auto;
+    background: #34495E;
+    padding: 10px;
+    margin: 0 20px 20px 0;
+    color: #fff;
+    font-family:sans-serif;
+}
+.weather ul li {
+    background: transparent;
+    display:block;
+}
+.weather ul li:hover{
+    background:transparent;
+    cursor:default;
+}
