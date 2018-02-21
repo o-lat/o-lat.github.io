@@ -188,7 +188,7 @@ function weather(){
             content: function() {
                 var self = this;
                 return $.ajax({
-                    url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + '51.6021467' + ',' + '0.2268894999999702' + '&key=AIzaSyBkwjbTjEuDLYe1Xdah9X4F4ztqvoHHLWM'
+                    url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=AIzaSyBkwjbTjEuDLYe1Xdah9X4F4ztqvoHHLWM'
                 }).done(function(data) {
                     var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
                     var country = data.results[3].address_components[6].long_name;
