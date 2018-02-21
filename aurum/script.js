@@ -192,9 +192,7 @@ function weather(){
                 }).done(function(data) {
                     var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
                     var country = data.results[3].address_components[6].long_name;
-                    
                     $('#output').html('Here is the weather for ' + city_region + '...<br><br><div class="weather"></div>');
-                    
                     var weather = $('.weather').flatWeatherPlugin({
                         location: city_region,
                         country: country,
@@ -204,23 +202,6 @@ function weather(){
                         view: 'today',
                         units: 'auto',
                     });
-                    
-                    /*$.dialog({
-                        columnClass: 'col-md-5 col-md-offset-3',
-                        title: 'Here is the weather...',
-                        content: '<div class="weather"></div>',
-                        onOpen: function(){
-                            var weather = $('.weather').flatWeatherPlugin({
-                                location: city_region,
-                                country: country,
-                                api: 'yahoo',
-                                displayCityNameOnly: true,
-                                timeformat: '12',
-                                view: 'today',
-                                units: 'auto',
-                            });
-                        }
-                    });*/
                     self.close();
                 }).fail(function(xhr, status, error) {
                     self.close();
