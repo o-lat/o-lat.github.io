@@ -274,7 +274,10 @@ ul li:hover ul {
 }
 @media only screen and (max-width: 870px) {
     .home .menu {
-        user-select:none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     .home ul li {
         display:inline-block;
