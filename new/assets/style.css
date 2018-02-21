@@ -285,7 +285,14 @@ ul li:hover ul {
         border-bottom:none;
         text-shadow:none;
         color:#000;
-        background:#fff;
+        background:#FFF;
+    }
+    .home ul li:active {
+        font: bold 60px/58px 'bebas_neuebold', sans-serif;
+        border-bottom:none;
+        text-shadow:none;
+        color:#000;
+        background:#EEE;
     }
     .home ul li ul {
         z-index:1000;
@@ -304,7 +311,7 @@ ul li:hover ul {
         opacity: 0;
         visibility: hidden;
     }
-    .home ul li:focus ul {
+    .home ul li:active ul {
         display: block;
         opacity: 1;
         visibility: visible;
@@ -316,7 +323,7 @@ ul li:hover ul {
         color: #fff;
         text-shadow:none;
     }
-    .home ul li ul li:focus {
+    .home ul li ul li:active {
         font: bold 22px/18px 'bebas_neuebold', sans-serif;
         border-bottom:none;
         background: #666;
