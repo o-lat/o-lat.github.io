@@ -3,6 +3,8 @@
 $(document).ready(function(){
     $.cookie.defaults = {path: '/', expires:365};
     
+    document.addEventListener("touchstart", function(){}, true);
+    
     if ($.cookie('old-layout') == '1'){
         $(document.body).removeClass('home');
         $('.wrap').css('display','block');
