@@ -291,8 +291,9 @@ ul li:hover ul {
         user-select: none;
     }
     .home ul li {
-        display:inline-block;
+        display:block;
         font: bold 60px/58px 'bebas_neuebold', sans-serif;
+        width: calc(100% - 40px);
     }
     .home ul li:hover {
         font: bold 60px/58px 'bebas_neuebold', sans-serif;
