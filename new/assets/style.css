@@ -272,13 +272,23 @@ ul li:hover ul {
 .picture:hover {
 	opacity:0.6;
 }
+#drop {
+    display:none;
+}
 @media only screen and (max-width: 870px) {
+    input,
+    textarea,
+    button,
+    select,
+    label,
+    a {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
     .home .menu {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
     .home ul li {
         display:inline-block;
@@ -315,11 +325,6 @@ ul li:hover ul {
         opacity: 0;
         visibility: hidden;
     }
-    .home ul li:active ul {
-        display: block;
-        opacity: 1;
-        visibility: visible;
-    }
     .home ul li ul li:hover {
         font: bold 22px/18px 'bebas_neuebold', sans-serif;
         border-bottom:none;
@@ -333,5 +338,10 @@ ul li:hover ul {
         background: #666;
         color: #fff;
         text-shadow:none;
+    }
+    .home #drop:checked + ul { 
+        display: block;
+        opacity:1;
+        visibility:visible;
     }
 }
