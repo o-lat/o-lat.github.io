@@ -218,7 +218,7 @@ function weather(){
                                 text: 'Search Google for weather',
                                 btnClass: 'btn-red',
                                 action: function(){
-                                    window.open('https://www.google.co.uk/#q=weather' + '_blank');
+                                    window.open('https://www.google.co.uk/#q=weather', '_blank');
                                 }
                             },
                             cancel: {
