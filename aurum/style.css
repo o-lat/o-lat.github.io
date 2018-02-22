@@ -81,6 +81,9 @@ a, img {
 .btn_square:hover {
     opacity:.5;
 }
+.btn .btn-default:focus{
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
 .go {
     background-image: url(assets/go.png);
 }
@@ -262,5 +265,6 @@ li a:hover{
     right:0;
 }
 .output p {
+    margin-top:0;
     margin-bottom:0;
 }
