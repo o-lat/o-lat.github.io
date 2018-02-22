@@ -1,5 +1,10 @@
 // JavaScript Document
 
+// TODO:
+// Geocoder only returning location for London
+// Joke api
+// Fetch results from Google HTML using ajax
+
 function getJoke() {
     /*$.ajax({
         url: 'https://icanhazdadjoke.com/',
@@ -192,19 +197,26 @@ function weather(){
                 return $.ajax({
                     url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&key=AIzaSyBkwjbTjEuDLYe1Xdah9X4F4ztqvoHHLWM'
                 }).done(function(data) {
-                    var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
-                    var country = data.results[3].address_components[6].long_name;
-                    $('#output').html('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
-                    var weather = $('.weather').flatWeatherPlugin({
-                        location: city_region,
-                        country: country,
-                        api: 'yahoo',
-                        displayCityNameOnly: true,
-                        timeformat: '12',
-                        view: 'today',
-                        units: 'auto',
-                    });
-                    self.close();
+                    if (data.results[3] == null || data.results[3].address_components[2].short_name == null || data.results[3].address_components[1].short_name == null ||
+                                data.results[3].address_components[6].long_name == null){
+                        console.log(latitude + ' + ' + longitude);
+                        $.alert('Error while retreiving weather for your location');
+                        self.close();
+                    } else {
+                        var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
+                        var country = data.results[3].address_components[6].long_name;
+                        $('#output').html('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
+                        var weather = $('.weather').flatWeatherPlugin({
+                            location: city_region,
+                            country: country,
+                            api: 'yahoo',
+                            displayCityNameOnly: true,
+                            timeformat: '12',
+                            view: 'today',
+                            units: 'auto',
+                        });
+                        self.close();
+                    }
                 }).fail(function(xhr, status, error) {
                     self.close();
                     $.confirm({
