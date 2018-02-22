@@ -293,10 +293,9 @@ function response() {
         outputElement.innerHTML = "I am neither male or female. I am a computer program designed to help people.";
     } else if (srch === 'okay aurum') {
         outputElement.innerHTML = 'Hello! How can I help you?';
-    } else if (srch.indexOf('weather') != -1) {
-        //window.open('https://www.google.co.uk/#q=weather', '_blank');
+    } /*else if (srch.indexOf('weather') != -1) {
         weather();
-    } else if (srch.indexOf('www') != -1) {
+    }*/ else if (srch.indexOf('www') != -1) {
         outputElement.innerHTML = "Please replace 'www.' with 'http://' or 'https://' or remove 'www.' if the textbox already contains 'http://' or 'https://'.";
     } else if (t.match(regex)) {
         if (srch.indexOf('http://') != -1 || srch.indexOf('https://') != -1) {
@@ -338,7 +337,24 @@ function response() {
                 srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
                 srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
                 {
-        $.confirm({
+        $.ajax({
+            url:'https://www.google.co.uk/#q=' + srch,
+                type:'GET',
+                success: function(data){
+                    html = $(data);
+                    console.log(html);
+                   if ($('._NId').html){
+                       $('._NId').html($(data).find('div > div > div').html());
+                       console.log($('._NId').html);
+                   } else {
+                       console.log('card not found');
+                   }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.status + ' ' + xhr.error);
+                }
+        });
+        /*$.confirm({
             title: 'Search Google?',
             content: "That looks like a question, what would you like to do?",
             type: 'orange',
@@ -358,7 +374,7 @@ function response() {
                     }
                 }
             }
-        });
+        });*/
     }
     // 18+ Content END
     else {
