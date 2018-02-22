@@ -393,7 +393,7 @@ $(document).ready(function(){
             $("#srch").val('');
         }
         if ($('#srch').val().length > 44) {
-            $('#output').html('The textbox cannot contain anymore than 45 characters.');
+            $('#output').html('Maximum length reached');
             $('#output').effect('shake',{distance:10});
         }
     });
