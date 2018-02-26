@@ -254,10 +254,6 @@ function response() {
     var output = $('#output');
     if (srch == '') {
         output.html("How can I help you, if you don't say anything?");
-    } else if (srch == 'bye aurum') {
-        getWelcome();
-    } else if (srch.indexOf('about') != -1) {
-        output.html("Hello, I'm Aurum. I was designed by Omar Latreche to help people answer their questions. However, I also like to talk to people aswell as answer their questions.");
     } else if (srch.indexOf('time') != -1) {
         output.html('The current time according to your computer is ' + moment().format('h:mm A'));
     } else if (srch.indexOf('joke') != -1 || srch.indexOf('funny') != -1) {
@@ -272,12 +268,10 @@ function response() {
         output.html('Hello there. How can I help you?');
     } else if (srch.indexOf('your name') != -1) {
         output.html("My name is Aurum.");
-    } else if (srch.indexOf('made you') != -1 || srch.indexOf('created you') != -1 || srch.indexOf('your creator') != -1) {
-        output.html("My creator is Omar Latreche.");
     } else if (srch.indexOf('your age') != -1 || srch.indexOf('old are you') != -1) {
         output.html("I am as old as you want me to be.");
     } else if (srch.indexOf('who are you') != -1) {
-        output.html("Hello, I'm Aurum. I was designed by Omar Latreche to help people find an answer to their questions. However, I also like to talk to people.");
+        output.html("Hello, I'm Aurum.");
     } else if (srch.indexOf('are you boy or girl') != -1 || srch.indexOf('are you male or female') != -1 || srch.indexOf('are you female') != -1 || 
                 srch.indexOf('are you male') != -1 || srch.indexOf('are you a male or female') != -1 || srch.indexOf('are you a male') != -1 || 
                 srch.indexOf('are you a female') != -1 || srch.indexOf('are you a girl') != -1 || srch.indexOf('are you a boy') != -1) 

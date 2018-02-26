@@ -137,6 +137,8 @@ a, img {
 }
 .ui-menu .ui-menu-item {
     font-size:16px;
+    width:500px;
+    display:block;
 }
 .menu {
 	width: 100%;
