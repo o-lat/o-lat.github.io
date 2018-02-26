@@ -137,6 +137,8 @@ a, img {
 }
 .ui-menu .ui-menu-item {
     font-size:16px;
+    width:500px;
+    display:block;
 }
 .menu {
 	width: 100%;
@@ -262,5 +264,6 @@ li a:hover{
     right:0;
 }
 .output p {
+    margin-top:0;
     margin-bottom:0;
 }
