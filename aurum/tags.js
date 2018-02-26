@@ -7,7 +7,7 @@ $(function() {
             $.ajax({
                 type: 'GET',
                 dataType: 'xml',
-                url: 'https://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=' + $('#srch').val(),
+                url: 'http://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=' + $('#srch').val(),
                 success: function(data){
                     $xml = $(data),
                     $suggestion = $xml.find("suggestion");
@@ -23,12 +23,7 @@ $(function() {
                     tags = [];
                 },
                 error: function(xhr,error,status){
-                    tags = ['Error while getting Google suggestions'];
-                    $( "#srch" ).autocomplete({
-                        minLength:1,
-                        delay:0,
-                        source: tags
-                    });
+                    $.alert('Error');
                 }
             });
         } else {
