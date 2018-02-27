@@ -392,6 +392,28 @@ $(document).ready(function(){
     getWelcome();
     getPlaceHolder();
     
+    if ($('.switch :checkbox').is(':checked')) {
+        $('#output').on("DOMSubtreeModified",function() {
+            var msg = new SpeechSynthesisUtterance('#output'.val());
+            window.speechSynthesis.speak(msg);
+        });
+        console.log('Voice output on');
+    } else {
+        console.log('Voice output off');
+    }
+    
+    $('.switch :checkbox').change(function() {
+        if (this.checked) {
+            $('#output').on("DOMSubtreeModified",function() {
+                var msg = new SpeechSynthesisUtterance('#output'.val());
+                window.speechSynthesis.speak(msg);
+            });
+            console.log('Voice output on');
+        } else {
+            console.log('Voice output off');
+        }
+    });
+    
     $('#srch').keypress(function(e){
         if(e.which == 13) {
             response();
