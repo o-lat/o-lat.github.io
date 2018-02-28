@@ -5,32 +5,11 @@
 // Joke api
 // Fetch results from Google HTML using ajax
 
-function speak(text){
-    $('.output').prepend('<p class="flashing">Speaking...</p>');
-    $("#srch").prop('disabled', true);
-    console.log('started speaking');
-    var msg = new SpeechSynthesisUtterance();
-    var voices = window.speechSynthesis.getVoices();
-    msg.voice = voices[10]; // Note: some voices don't support altering params
-    msg.voiceURI = 'native';
-    msg.volume = 1; // 0 to 1
-    msg.rate = 1; // 0.1 to 10
-    msg.text = text;
-    msg.pitch = 2; //0 to 2
-    msg.lang = 'en-US';
-
-    msg.onend = function(e) {
-        console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
-        $('div.output > .flashing').remove();
-        $("#srch").prop('disabled', false);
-    };
-    
-    speechSynthesis.speak(msg);
-}
 function setOutput(text){
     if ($('.switch :checkbox').is(':checked')) {
         $('.output').prepend('<p class="flashing">Speaking...</p>');
-        $("#srch").prop('disabled', true);
+        $("div.search-cont > input").prop('disabled', true);
+        
         console.log('started speaking');
         var msg = new SpeechSynthesisUtterance();
         var voices = window.speechSynthesis.getVoices();
@@ -47,7 +26,7 @@ function setOutput(text){
         msg.onend = function(e) {
             console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
             $('div.output > .flashing').remove();
-            $("#srch").prop('disabled', false);
+            $("div.search-cont > input").prop('disabled', false);
         };
         $('#output').html(text);
     } else {

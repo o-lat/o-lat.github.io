@@ -75,6 +75,14 @@ a, img {
 	outline:none;
     transition: opacity 0.1s ease-in;
 }
+.btn_square:disabled,
+.btn_square[disabled] {
+    opacity:0.5;
+}
+.btn_square:disabled:hover {
+    opacity:0.5;
+    cursor:default;
+}
 .btn_square:hover {
     opacity:.5;
 }
