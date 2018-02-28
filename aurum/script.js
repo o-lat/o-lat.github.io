@@ -5,6 +5,56 @@
 // Joke api
 // Fetch results from Google HTML using ajax
 
+function speak(text){
+    $('.output').prepend('<p class="flashing">Speaking...</p>');
+    $("#srch").prop('disabled', true);
+    console.log('started speaking');
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10]; // Note: some voices don't support altering params
+    msg.voiceURI = 'native';
+    msg.volume = 1; // 0 to 1
+    msg.rate = 1; // 0.1 to 10
+    msg.text = text;
+    msg.pitch = 2; //0 to 2
+    msg.lang = 'en-US';
+
+    msg.onend = function(e) {
+        console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
+        $('div.output > .flashing').remove();
+        $("#srch").prop('disabled', false);
+    };
+    
+    speechSynthesis.speak(msg);
+}
+function setOutput(text){
+    if ($('.switch :checkbox').is(':checked')) {
+        $('.output').prepend('<p class="flashing">Speaking...</p>');
+        $("#srch").prop('disabled', true);
+        console.log('started speaking');
+        var msg = new SpeechSynthesisUtterance();
+        var voices = window.speechSynthesis.getVoices();
+        msg.voice = voices[10]; // Note: some voices don't support altering params
+        msg.voiceURI = 'native';
+        msg.volume = 1; // 0 to 1
+        msg.rate = 1; // 0.1 to 10
+        msg.text = text;
+        msg.pitch = 2; //0 to 2
+        msg.lang = 'en-US';
+        
+        speechSynthesis.speak(msg);
+
+        msg.onend = function(e) {
+            console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
+            $('div.output > .flashing').remove();
+            $("#srch").prop('disabled', false);
+        };
+        $('#output').html(text);
+    } else {
+        $('#output').html(text);
+    }
+    
+}
 function getJoke() {
     /*$.ajax({
         url: 'https://icanhazdadjoke.com/',
@@ -36,7 +86,7 @@ function getJoke() {
     items[17] = "What did the mother broom say to the baby broom?\nIt's time to go to sweep.";
     items[18] = "What lies on its back, one hundred feet in the air?\nA dead centipede.";
     items[19] = "What did the rug say to the floor?\nDon't move, I've got you covered.";
-    $('#output').html(items[Math.floor(Math.random() * items.length)]);
+    setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function getWelcome() {
     var items = [];
@@ -60,7 +110,7 @@ function getWelcome() {
     items[17] = "Hi, I'm aurum";
     items[18] = "Hello there";
     items[19] = "How do you do?";
-    $('#output').html(items[Math.floor(Math.random() * items.length)]);
+    setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function getPlaceHolder() {
     var items = [];
@@ -108,7 +158,7 @@ function getResponse() {
     items[17] = "I doubt it";
     items[18] = "That can't be true";
     items[19] = "You are making that up";
-    $('#output').html(items[Math.floor(Math.random() * items.length)]);
+    setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function getResponseSwear() {
     var items = [];
@@ -132,7 +182,7 @@ function getResponseSwear() {
     items[17] = "Why do you swear?";
     items[18] = "Only mean people swear.";
     items[19] = "Don't talk to me if you're going to swear.";
-    $('#output').html(items[Math.floor(Math.random() * items.length)]);
+    setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function getResponseRude() {
     var items = [];
@@ -156,11 +206,11 @@ function getResponseRude() {
     items[17] = "Why are you rude?";
     items[18] = "Only mean people are rude to me.";
     items[19] = "Don't talk to me if you're going to be rude.";
-    $('#output').html(items[Math.floor(Math.random() * items.length)]);
+    setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function weather(){
     if (navigator.geolocation) {
-        $('#output').html('I need to know where you are to tell you the weather... Please press "Allow"');
+        setOutput('I need to know where you are to tell you the weather... Please press "Allow"');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         $.confirm({
@@ -205,7 +255,7 @@ function weather(){
                     } else {
                         var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
                         var country = data.results[3].address_components[6].long_name;
-                        $('#output').html('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
+                        setOutput('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
                         var weather = $('.weather').flatWeatherPlugin({
                             location: city_region,
                             country: country,
@@ -251,34 +301,33 @@ function weather(){
 function response() {
     var srch = $('#srch').val();
     var regex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-    var output = $('#output');
     if (srch == '') {
-        output.html("How can I help you, if you don't say anything?");
+        setOutput("How can I help you, if you don't say anything?");
     } else if (srch.indexOf('time') != -1) {
-        output.html('The current time according to your computer is ' + moment().format('h:mm A'));
+        setOutput('The current time according to your computer is ' + moment().format('h:mm A'));
     } else if (srch.indexOf('joke') != -1 || srch.indexOf('funny') != -1) {
         getJoke();
     } else if (srch.indexOf('how are you') != -1) {
-        output.html("I'm fine, thanks.");
+        setOutput("I'm fine, thanks.");
     } else if (srch.indexOf('hello') != -1) {
-        output.html('Hello there. How can I help you?');
+        setOutput('Hello there. How can I help you?');
     } else if (srch.indexOf('whats up') != -1 || srch.indexOf("what's up") != -1) {
-        output.html('The sky.');
+        setOutput('The sky.');
     } else if (srch.indexOf('hi') != -1 || srch.indexOf('hey') != -1) {
-        output.html('Hello there. How can I help you?');
+        setOutput('Hello there. How can I help you?');
     } else if (srch.indexOf('your name') != -1) {
-        output.html("My name is Aurum.");
+        setOutput("My name is Aurum.");
     } else if (srch.indexOf('your age') != -1 || srch.indexOf('old are you') != -1) {
-        output.html("I am as old as you want me to be.");
+        setOutput("I am as old as you want me to be.");
     } else if (srch.indexOf('who are you') != -1) {
-        output.html("Hello, I'm Aurum.");
+        setOutput("Hello, I'm Aurum.");
     } else if (srch.indexOf('are you boy or girl') != -1 || srch.indexOf('are you male or female') != -1 || srch.indexOf('are you female') != -1 || 
                 srch.indexOf('are you male') != -1 || srch.indexOf('are you a male or female') != -1 || srch.indexOf('are you a male') != -1 || 
                 srch.indexOf('are you a female') != -1 || srch.indexOf('are you a girl') != -1 || srch.indexOf('are you a boy') != -1) 
                 {
-        output.html("I am neither male or female. I am a computer program designed to help people.");
+        setOutput("I am neither male or female. I am a computer program designed to help people.");
     } else if (srch === 'okay aurum') {
-        output.html('Hello! How can I help you?');
+        setOutput('Hello! How can I help you?');
     } else if (srch.indexOf('weather') != -1) {
         weather();
     } else if (srch.match(regex)) {
@@ -288,13 +337,13 @@ function response() {
             window.open('http://' + srch, '_blank');
         }
     } else if (srch.indexOf('your fat') != -1 || srch.indexOf('you are fat') != -1 || srch.indexOf("you're fat") != -1) {
-        output.html('So is your mum.');
+        setOutput('So is your mum.');
     } else if (srch.indexOf('siri') != -1) {
-        output.html("Please don't mention Siri around me.");
+        setOutput("Please don't mention Siri around me.");
     } else if (srch.indexOf('google now') != -1) {
-        output.html("Google Now puts me and other programs to shame.");
+        setOutput("Google Now puts me and other programs to shame.");
     } else if (srch.indexOf('cortana') != -1) {
-        output.html("Please don't mention that disgrace!");
+        setOutput("Please don't mention that disgrace!");
     }
     // 18+ Content
     else if (srch.indexOf('bloody') != -1 || 
@@ -314,9 +363,9 @@ function response() {
                 {
         getResponseRude();
     } else if (srch.indexOf('nigger') != -1) {
-        output.html("Don't be racist!");
+        setOutput("Don't be racist!");
     } else if (srch.indexOf('nigga') != -1) {
-        output.html("Don't be racist!");
+        setOutput("Don't be racist!");
     } else if (srch.indexOf('what') != -1 || srch.indexOf('when') != -1 || srch.indexOf('where') != -1 || srch.indexOf('why') != -1 || 
                 srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
                 srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
@@ -390,29 +439,16 @@ function response() {
 
 $(document).ready(function(){
     getWelcome();
-    getPlaceHolder();
+    getPlaceHolder(); 
     
-    if ($('.switch :checkbox').is(':checked')) {
-        $('#output').on("DOMSubtreeModified",function() {
-            var msg = new SpeechSynthesisUtterance('#output'.val());
-            window.speechSynthesis.speak(msg);
-        });
-        console.log('Voice output on');
+    if ('speechSynthesis' in window) {
+        // Synthesis support
+        $('.footer').removeClass('hidden');
+        $('label.switch > input').prop('checked', true);
     } else {
-        console.log('Voice output off');
+        // nothing
+        $('label.switch > input').prop('disabled', true);
     }
-    
-    $('.switch :checkbox').change(function() {
-        if (this.checked) {
-            $('#output').on("DOMSubtreeModified",function() {
-                var msg = new SpeechSynthesisUtterance('#output'.val());
-                window.speechSynthesis.speak(msg);
-            });
-            console.log('Voice output on');
-        } else {
-            console.log('Voice output off');
-        }
-    });
     
     $('#srch').keypress(function(e){
         if(e.which == 13) {
