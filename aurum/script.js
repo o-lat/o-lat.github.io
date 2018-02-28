@@ -368,6 +368,7 @@ function response() {
                     console.log(xhr.status + ' ' + xhr.error);
                 }
         });*/
+        
         $.confirm({
             title: 'Search Google?',
             content: "That looks like a question, what would you like to do?",
@@ -390,6 +391,17 @@ function response() {
                 }
             }
         });
+        /*
+        console.log($('#srch').val());
+        $.ajax({
+            url: 'https://api.duckduckgo.com/?q=' + $('#srch').val() + '&format=json&pretty=1',
+            success: function(data) {
+                console.log(data);//.RelatedTopics.Result)
+            },
+            error: function(xhr,error,status) {
+                console.log(xhr.status);
+            }
+        });*/
     }
     // 18+ Content END
     else {
