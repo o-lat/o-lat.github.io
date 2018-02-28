@@ -27,6 +27,7 @@ function setOutput(text){
             console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
             $('div.output > .flashing').remove();
             $("div.search-cont > input").prop('disabled', false);
+            $('#srch').focus();
         };
         $('#output').html(text);
     } else {
@@ -189,7 +190,7 @@ function getResponseRude() {
 }
 function weather(){
     if (navigator.geolocation) {
-        setOutput('I need to know where you are to tell you the weather... Please press "Allow"');
+        $('#output').html('I need to know where you are to tell you the weather... Please press "Allow"');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         $.confirm({
@@ -234,7 +235,8 @@ function weather(){
                     } else {
                         var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
                         var country = data.results[3].address_components[6].long_name;
-                        setOutput('<p>Here is the weather for ' + city_region + '...</p><div class="weather"></div>');
+                        setOutput('Here is the weather for ' + city_region + '...');
+                        $('#output').append('<div class="weather"></div>');
                         var weather = $('.weather').flatWeatherPlugin({
                             location: city_region,
                             country: country,
