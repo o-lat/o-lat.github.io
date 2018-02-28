@@ -9,6 +9,7 @@ function setOutput(text){
     if ($('.switch :checkbox').is(':checked')) {
         $('.output').prepend('<p class="flashing">Speaking...</p>');
         $("div.search-cont > input").prop('disabled', true);
+        $('.search-cont').css('border-left','8px solid #f0ad4e');
         
         console.log('started speaking');
         var msg = new SpeechSynthesisUtterance();
@@ -27,6 +28,7 @@ function setOutput(text){
             console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
             $('div.output > .flashing').remove();
             $("div.search-cont > input").prop('disabled', false);
+            $('.search-cont').css('border-left','8px solid #5cb85c');
             $('#srch').focus();
         };
         $('#output').html(text);

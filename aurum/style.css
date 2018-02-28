@@ -45,14 +45,17 @@ a, img {
 }
 .search-cont {
 	background-color:#FFF;
-	width:547px;
+    border-left:8px solid #5cb85c;
+	width:535px;
 	height:auto;
 	margin-top:20px;
 	padding:0;
+    margin-left:3px;
+    transition: border 0.5s ease;
 }
 .search-field {
 	border-radius: 0px;
-    width: 457px;
+    width: 445px;
     height: 41px;
     font-size: 100%;
     outline: none;
@@ -61,7 +64,13 @@ a, img {
     border: none;
     padding-left: 9px;
     padding-right: 4px;
-    margin-left:-4px;
+    margin-left:0px;
+}
+.search-field:disabled,
+.search-field[disabled] {
+    background:#FFF;
+    opacity:0.5;
+    border:none;
 }
 .btn_square {
 	width: 37px;
@@ -71,7 +80,7 @@ a, img {
     background-color: #FFF;
     cursor: pointer;
     vertical-align: top;
-    margin: 2px 0px 2px 0px;
+    margin: 2px 0px 2px -3px;
 	outline:none;
     transition: opacity 0.1s ease-in;
 }
@@ -142,7 +151,7 @@ a, img {
 }
 .ui-menu .ui-menu-item {
     font-size:16px;
-    width:500px;
+    width:488px;
     display:block;
 }
 .menu {
