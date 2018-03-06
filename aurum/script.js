@@ -59,26 +59,26 @@ function getJoke() {
         }
     });*/
     var items = [];
-    items[0] = "What happens to a frog's car when it breaks down?\nIt gets toad away. ";
-    items[1] = "What do you call a pig that does karate?\nA pork chop.";
-    items[2] = "What do you call the best butter on the farm?\nA goat.";
-    items[3] = "What do you get if you cross an insect with the Easter rabbit?\nBugs Bunny.";
-    items[4] = "How do you prevent a Summer cold?\nCatch it in the Winter!";
-    items[5] = "How does a pig go to hospital?\nIn a hambulance.";
-    items[6] = "How do you make an egg laugh?\nTell it a yolk.";
-    items[7] = "What has 6 eyes but can't see?\n3 blind mice.";
-    items[8] = "What has a lot of keys but can not open any doors?\nA piano.";
-    items[9] = "What has one horn and gives milk?\nA milk truck.";
-    items[10] = "What happens when frogs park illegally?\nThey get toad.";
-    items[11] = "What can you hold without ever touching it?\nA conversation.";
-    items[12] = "What clothes does a house wear?\nAddress.";
-    items[13] = "What country makes you shiver?\nChile.";
-    items[14] = "What did one elevator say to the other?\nI think I'm coming down with something!";
-    items[15] = "What did one magnet say to the other?\nI find you very attractive.";
-    items[16] = "What kind of cats like to go bowling?\nAlley cats.";
-    items[17] = "What did the mother broom say to the baby broom?\nIt's time to go to sweep.";
-    items[18] = "What lies on its back, one hundred feet in the air?\nA dead centipede.";
-    items[19] = "What did the rug say to the floor?\nDon't move, I've got you covered.";
+    items[0] = "What happens to a frog's car when it breaks down? It gets toad away. ";
+    items[1] = "What do you call a pig that does karate? A pork chop.";
+    items[2] = "What do you call the best butter on the farm? A goat.";
+    items[3] = "What do you get if you cross an insect with the Easter rabbit? Bugs Bunny.";
+    items[4] = "How do you prevent a Summer cold? Catch it in the Winter!";
+    items[5] = "How does a pig go to hospital? In a hambulance.";
+    items[6] = "How do you make an egg laugh? Tell it a yolk.";
+    items[7] = "What has 6 eyes but can't see? 3 blind mice.";
+    items[8] = "What has a lot of keys but can not open any doors? A piano.";
+    items[9] = "What has one horn and gives milk? A milk truck.";
+    items[10] = "What happens when frogs park illegally? They get toad.";
+    items[11] = "What can you hold without ever touching it? A conversation.";
+    items[12] = "What clothes does a house wear? Address.";
+    items[13] = "What country makes you shiver? Chile.";
+    items[14] = "What did one elevator say to the other? I think I'm coming down with something!";
+    items[15] = "What did one magnet say to the other? I find you very attractive.";
+    items[16] = "What kind of cats like to go bowling? Alley cats.";
+    items[17] = "What did the mother broom say to the baby broom? It's time to go to sweep.";
+    items[18] = "What lies on its back, one hundred feet in the air? A dead centipede.";
+    items[19] = "What did the rug say to the floor? Don't move, I've got you covered.";
     setOutput(items[Math.floor(Math.random() * items.length)]);
 }
 function getWelcome() {
