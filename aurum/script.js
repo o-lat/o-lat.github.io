@@ -7,11 +7,22 @@
 
 function setOutput(text){
     if ($('.switch :checkbox').is(':checked')) {
+        $('#output').html(text);
         $('.output').prepend('<p class="flashing">Speaking...</p>');
         $("div.search-cont > input").prop('disabled', true);
         $('.search-cont').css('border-left','8px solid #f0ad4e');
         
+        function stopSpeaking() {
+            console.log('finshed speaking');
+            $('div.output > .flashing').remove();
+            $("div.search-cont > input").prop('disabled', false);
+            $('.search-cont').css('border-left','8px solid #5cb85c');
+            $('#srch').focus();
+        }
+        
         console.log('started speaking');
+        responsiveVoice.speak(text, "US English Female", {onend:stopSpeaking});
+        /*
         var msg = new SpeechSynthesisUtterance();
         var voices = window.speechSynthesis.getVoices();
         msg.voice = voices[10]; // Note: some voices don't support altering params
@@ -25,13 +36,13 @@ function setOutput(text){
         speechSynthesis.speak(msg);
 
         msg.onend = function(e) {
+            msg.onend = function(e) {
             console.log('finshed speaking in ' + event.elapsedTime / 1000 + ' seconds.');
             $('div.output > .flashing').remove();
             $("div.search-cont > input").prop('disabled', false);
             $('.search-cont').css('border-left','8px solid #5cb85c');
             $('#srch').focus();
-        };
-        $('#output').html(text);
+        };*/        
     } else {
         $('#output').html(text);
     }
@@ -435,6 +446,7 @@ function response() {
 $(document).ready(function(){
     getWelcome();
     getPlaceHolder(); 
+    responsiveVoice.setDefaultVoice("US English Female");
     
     if ('speechSynthesis' in window) {
         // Synthesis support
