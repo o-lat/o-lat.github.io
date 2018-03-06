@@ -42,7 +42,7 @@ function setOutput(text){
             $("div.search-cont > input").prop('disabled', false);
             $('.search-cont').css('border-left','8px solid #5cb85c');
             $('#srch').focus();
-        };*/        
+        };*/
     } else {
         $('#output').html(text);
     }
@@ -447,15 +447,41 @@ $(document).ready(function(){
     getWelcome();
     getPlaceHolder(); 
     responsiveVoice.setDefaultVoice("US English Female");
+    console.log(responsiveVoice.voiceSupport());
     
-    if ('speechSynthesis' in window) {
-        // Synthesis support
-        $('.footer').removeClass('hidden');
+    if(responsiveVoice.voiceSupport() == true) {
         $('label.switch > input').prop('checked', true);
     } else {
-        // nothing
-        $('label.switch > input').prop('disabled', true);
+        $('label.switch > input').prop('checked', false);
     }
+    
+    $('.switch').click(function(){
+        if(responsiveVoice.voiceSupport() == false) {
+            if ($('.switch :checkbox').is(':checked')) {
+                setTimeout(function(){
+                    $('label.switch > input').prop('checked', false);
+                    $.confirm({
+                        title: 'Not supported',
+                        content: "Try upgrading your browser to use this feature",
+                        escapeKey: 'cancel',
+                        type: 'red',
+                        icon: 'fas fa-exclamation-triangle',
+                        buttons: {
+                            cancel: {
+                                text: "Close",
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    this.close();
+                                }
+                            }
+                        }
+                    });
+                },300);
+            }
+        } else {
+            // nothing
+        }
+    });
     
     $('#srch').keypress(function(e){
         if(e.which == 13) {
@@ -463,9 +489,9 @@ $(document).ready(function(){
             getPlaceHolder();
             $("#srch").val('');
         }
-        if ($('#srch').val().length > 44) {
-            $('#output').html('Maximum length reached');
-            $('#output').effect('shake',{distance:10});
+        if ($('#srch').val().length == 45 && $('#output').html() != 'Maximum length reached') {
+            setOutput('Maximum length reached');
+            $('#output').effect('shake',{distance:5});
         }
     });
     $('.go').click(function(){
