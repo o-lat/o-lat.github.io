@@ -294,7 +294,7 @@ function weather(){
 }
 function searchResults() {
     $('#output').html('Loading results...');
-    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
+    $.getJSON('https://www.whateverorigin.org/get?url=' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
         setOutput('I hope this helps...');
         results_str = $(data.contents).find('#b_results');
         results = $(results_str[0].innerHTML);
@@ -423,6 +423,22 @@ $(document).ready(function(){
         } else {
             // nothing
         }
+    });
+    
+    $('div.footer > .info').click(function(){
+        $.confirm({
+            title: 'Information',
+            content: 'Search results and suggestions are obtianed from <a href="https://bing.com/">Bing</a>.',
+            icon: 'fas fa-info-circle',
+            buttons: {
+                cancel: {
+                    text: 'Ok',
+                    action: function(){
+                        this.close();
+                    }
+                }
+            }
+        });
     });
     
     $('#srch').keypress(function(e){
