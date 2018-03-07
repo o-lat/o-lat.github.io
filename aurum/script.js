@@ -292,6 +292,20 @@ function weather(){
         });
     }
 }
+function searchResults() {
+    $('#output').html('Loading results...');
+    $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
+        setOutput('I hope this helps...');
+        results_str = $(data.contents).find('#b_results');
+        results = $(results_str[0].innerHTML);
+        $('#output').append('<div class="bing_results"></div>');
+        for (i = 0; i < results.length; i++) {
+            if (results[i].className == 'b_algo'){
+                $('.bing_results').append(results[i]);
+            }
+        }
+    });
+}
 function response() {
     var srch = $('#srch').val();
     var regex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
@@ -364,82 +378,11 @@ function response() {
                 srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
                 srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
                 {
-        /*$.ajax({
-            url:'https://www.google.co.uk/#q=' + srch,
-                type:'GET',
-                success: function(data){
-                    html = $(data);
-                    console.log(html);
-                   if ($('._NId').html){
-                       $('._NId').html($(data).find('div > div > div').html());
-                       console.log($('._NId').html);
-                   } else {
-                       console.log('card not found');
-                   }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.status + ' ' + xhr.error);
-                }
-        });*/
-        
-        $.confirm({
-            title: 'Search Google?',
-            content: "That looks like a question, what would you like to do?",
-            escapeKey: 'cancel',
-            type: 'orange',
-            icon: 'fa fa-warning',
-            buttons: {
-                confirm: {
-                    text: 'Search Google',
-                    btnClass: 'btn-orange',
-                    action: function(){
-                        window.open('https://www.google.co.uk/#q=' + srch, '_blank');
-                    }
-                },
-                cancel: {
-                    text: "I don't want an answer",
-                    action: function(){
-                        this.close();
-                    }
-                }
-            }
-        });
-        /*
-        console.log($('#srch').val());
-        $.ajax({
-            url: 'https://api.duckduckgo.com/?q=' + $('#srch').val() + '&format=json&pretty=1',
-            success: function(data) {
-                console.log(data);//.RelatedTopics.Result)
-            },
-            error: function(xhr,error,status) {
-                console.log(xhr.status);
-            }
-        });*/
+        searchResults();
     }
     // 18+ Content END
     else {
-        $.confirm({
-            title: "Sorry...",
-            content: "I don't understand. What do you want to do?",
-            escapeKey: 'cancel',
-            type: 'orange',
-            icon: 'fa fa-warning',
-            buttons: {
-                confirm: {
-                    text: 'Search Google',
-                    btnClass: 'btn-orange',
-                    action: function(){
-                        window.open('https://www.google.co.uk/#q=' + srch, '_blank');
-                    }
-                },
-                cancel: {
-                    text: "Do nothing",
-                    action: function(){
-                        this.close();
-                    }
-                }
-            }
-        });
+        searchResults();
     }
 }
 
@@ -447,7 +390,6 @@ $(document).ready(function(){
     getWelcome();
     getPlaceHolder(); 
     responsiveVoice.setDefaultVoice("US English Female");
-    console.log(responsiveVoice.voiceSupport());
     
     if(responsiveVoice.voiceSupport() == true) {
         $('label.switch > input').prop('checked', true);

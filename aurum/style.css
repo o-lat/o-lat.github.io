@@ -166,19 +166,19 @@ a, img {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 	min-width:500px;
 }
-a {
+.menu a {
     text-decoration: none;
     outline: none;
     color: #000;
 }
-ul {
+.menu ul {
     text-align: left;
     display: inline;
     margin: 0;
     padding: 15px 4px 17px 0;
     list-style: none;
 }
-ul li {
+.menu ul li {
     font: bold 12px/18px sans-serif;
     display: inline-block;
     margin-right: -5px;
@@ -193,11 +193,11 @@ ul li {
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-ul li:hover {
+.menu ul li:hover {
     background: #555;
     color: #fff;
 }
-ul li ul {
+.menu ul li ul {
     padding: 0;
     position: absolute;
     top: 48px;
@@ -215,35 +215,35 @@ ul li ul {
     -o-transition: opacity 0.2s;
     -transition: opacity 0.2s;
 }
-ul li ul li {
+.menu ul li ul li {
     background: #555;
     display: block;
     color: #fff;
     text-shadow: 0 -1px 0 #000;
 }
-ul li ul li:hover {
+.menu ul li ul li:hover {
     background: #666;
 }
-ul li:hover ul {
+.menu ul li:hover ul {
     display: block;
     opacity: 1;
     visibility: visible;
 }
-.sub_ul {
+.menu .sub_ul {
 	background: #fff;
 	color: #000;
 	cursor: default;
 	text-shadow: none;
     border:1px solid #555;
 }
-.sub_ul:hover {
+.menu .sub_ul:hover {
 	background: #fff;
 	color: #000;
 }
-li a:hover{
+.menu li a:hover{
     text-decoration:none;
 }
-.active{
+.menu .active{
     text-decoration:underline;
 }
 .weather {
