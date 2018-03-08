@@ -292,33 +292,60 @@ function weather(){
         });
     }
 }
-function searchResults() {
-    $('#output').html('Loading results...');
-    /*
-    $.getJSON('https://cors-anywhere.herokuapp.com/' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
-        setOutput('I hope this helps...');
-        results_str = $(data.contents).find('#b_results');
-        results = $(results_str[0].innerHTML);
-        console.log(results);
-        $('#output').append('<div class="bing_results"></div>');
-        for (i = 0; i < results.length; i++) {
-            if (results[i].className == 'b_algo'){
-                $('.bing_results').append(results[i]);
-            }
-        }
-    });
-    */
-    /*$.ajax({
-        url: 'https://cors-anywhere.herokuapp.com/' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()),
+function searchResults(query) {
+    $('#output').html('<div class="loader"></div>');
+    $.ajax({
+        url: 'https://o-lat.herokuapp.com/' + 'https://www.bing.com/search?q=' + query,
         type: 'GET',
         success: function(data){
-            console.log(data);
+            results_str = $(data).find('#b_results');
+            results = $(results_str[0].innerHTML);
+            var has_results = false;
+            for (i = 0; i < results.length; i++) {
+                if (results[i].className == 'b_algo'){
+                    has_results = true;
+                }
+            }
+            console.log(has_results);
+            if (has_results == false){
+                setOutput("I'm having trouble fetching your results. What would you like to do?")
+                $.confirm({
+                    title: 'Error',
+                    content: "Unable to get results. What would you like to do?",
+                    escapeKey: 'cancel',
+                    type: 'red',
+                    icon: 'fas fa-exclamation-triangle',
+                    buttons: {
+                        confirm: {
+                            text: 'Search Google for results',
+                            btnClass: 'btn-red',
+                            action: function(){
+                                window.open('https://www.google.co.uk/#q=' + query, '_blank');
+                            }
+                        },
+                        cancel: {
+                            text: "Do nothing",
+                            action: function(){
+                                this.close();
+                            }
+                        }
+                    }
+                });
+            } else {
+                setOutput('I hope this helps...');
+                $('#output').append('<div class="bing_results"></div>');
+                for (i = 0; i < results.length; i++) {
+                    if (results[i].className == 'b_algo'){
+                        $('.bing_results').append(results[i]);
+                    }
+                }
+            }
         },
         error: function(xhr,error,status){
             console.log('Error: ' + xhr.status);
         }
-    });*/
-    var cors_api_url = 'https://o-lat.herokuapp.com/';
+    });
+    /*var cors_api_url = 'https://o-lat.herokuapp.com/';
     function doCORSRequest(options, printResult) {
         var x = new XMLHttpRequest();
         x.open(options.method, cors_api_url + options.url);
@@ -343,7 +370,7 @@ function searchResults() {
                 $('.bing_results').append(results[i]);
             }
         }
-    });
+    });*/
 }
 function response() {
     var srch = $('#srch').val();
@@ -417,7 +444,7 @@ function response() {
                 srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
                 srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
                 {
-        searchResults();
+        searchResults($('#srch').val());
     }
     // 18+ Content END
     else {
@@ -485,6 +512,7 @@ $(document).ready(function(){
             response();
             getPlaceHolder();
             $("#srch").val('');
+            $('.ui-autocomplete').css('display','none');
         }
         if ($('#srch').val().length == 45 && $('#output').html() != 'Maximum length reached') {
             setOutput('Maximum length reached');
