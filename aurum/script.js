@@ -294,10 +294,49 @@ function weather(){
 }
 function searchResults() {
     $('#output').html('Loading results...');
-    $.getJSON('https://www.whateverorigin.org/get?url=' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
+    /*
+    $.getJSON('https://cors-anywhere.herokuapp.com/' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()) + '&callback=?', function(data){
         setOutput('I hope this helps...');
         results_str = $(data.contents).find('#b_results');
         results = $(results_str[0].innerHTML);
+        console.log(results);
+        $('#output').append('<div class="bing_results"></div>');
+        for (i = 0; i < results.length; i++) {
+            if (results[i].className == 'b_algo'){
+                $('.bing_results').append(results[i]);
+            }
+        }
+    });
+    */
+    /*$.ajax({
+        url: 'https://cors-anywhere.herokuapp.com/' + encodeURIComponent('https://www.bing.com/search?q=' + $('#srch').val()),
+        type: 'GET',
+        success: function(data){
+            console.log(data);
+        },
+        error: function(xhr,error,status){
+            console.log('Error: ' + xhr.status);
+        }
+    });*/
+    var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+    function doCORSRequest(options, printResult) {
+        var x = new XMLHttpRequest();
+        x.open(options.method, cors_api_url + options.url);
+        x.onload = x.onerror = function() {
+            printResult((x.responseText || ''));
+        };
+        x.send(options.data);
+    }
+
+    doCORSRequest({
+        method: 'GET',
+        url: 'https://www.bing.com/search?q=' + $('#srch').val(),
+        data: document.getElementsByClassName('bing_results').innerHTML
+    }, function printResult(result) {
+        setOutput('I hope this helps...');
+        results_str = $(result).find('#b_results');
+        results = $(results_str[0].innerHTML);
+        console.log(results);
         $('#output').append('<div class="bing_results"></div>');
         for (i = 0; i < results.length; i++) {
             if (results[i].className == 'b_algo'){
