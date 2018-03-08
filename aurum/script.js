@@ -448,7 +448,7 @@ function response() {
     }
     // 18+ Content END
     else {
-        searchResults();
+        searchResults($('#srch').val());
     }
 }
 
