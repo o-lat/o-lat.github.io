@@ -26,13 +26,6 @@
     line-height:17px;
     padding-bottom:10px;
 }
-.bing_results li a {
-    color:#001ba0;
-    font-weight:normal;
-}
-.bing_results li a:visited {
-    color:#600090;
-}
-.bing_results .b_deep,.social_ic,.tab-container,.b_factrow,.b_vPanel,.c_tlbxTrg,.sa_uc,.rc_vlHorizontalImage,.b_overhangR,form,table {
+.bing_results .b_deep,.social_ic,.tab-container,.b_factrow,.b_vPanel,.c_tlbxTrg,.sa_uc,.rc_vlHorizontalImage,.b_overhangR,form,table,.inner {
     display:none;
 }

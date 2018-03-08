@@ -293,21 +293,60 @@ function weather(){
     }
 }
 function searchResults(query) {
-    $('#output').html('<div class="loader"></div>');
-    $.ajax({
-        url: 'https://o-lat.herokuapp.com/' + 'https://www.bing.com/search?q=' + query,
-        type: 'GET',
-        success: function(data){
-            results_str = $(data).find('#b_results');
-            results = $(results_str[0].innerHTML);
-            var has_results = false;
-            for (i = 0; i < results.length; i++) {
-                if (results[i].className == 'b_algo'){
-                    has_results = true;
+    $.confirm({
+        content: function() {
+            var self = this;
+            return $.ajax({
+                url: 'https://o-lat.herokuapp.com/' + 'https://www.bing.com/search?q=' + query,
+                type: 'GET'
+            }).done(function(data) {
+                results_str = $(data).find('#b_results');
+                results = $(results_str[0].innerHTML);
+                var has_results = false;
+                for (i = 0; i < results.length; i++) {
+                    if (results[i].className == 'b_algo'){
+                        has_results = true;
+                    }
                 }
-            }
-            console.log(has_results);
-            if (has_results == false){
+                console.log(has_results);
+                if (has_results == false){
+                    self.close();
+                    setOutput("I'm having trouble fetching your results. What would you like to do?")
+                    $.confirm({
+                        title: 'Error',
+                        content: "Unable to get results. What would you like to do?",
+                        escapeKey: 'cancel',
+                        type: 'red',
+                        icon: 'fas fa-exclamation-triangle',
+                        buttons: {
+                            confirm: {
+                                text: 'Search Google for results',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    window.open('https://www.google.co.uk/#q=' + query, '_blank');
+                                }
+                            },
+                            cancel: {
+                                text: "Do nothing",
+                                action: function(){
+                                    this.close();
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    setOutput("Here's some web results I found for &quot;" + '<span class="quote">' + query + '</span>' + "&quot;...");
+                    $('#output').append('<div class="bing_results"></div>');
+                    for (i = 0; i < results.length; i++) {
+                        if (results[i].className == 'b_algo'){
+                            $('.bing_results').append(results[i]);
+                        }
+                    }
+                    $('#output').append('<p class="small">Not what you wanted? <a href="https://google.com/#q=' + query + '">Search Google</a>');
+                    self.close();
+                }
+            }).fail(function(xhr, status, error) {
+                self.close();
                 setOutput("I'm having trouble fetching your results. What would you like to do?")
                 $.confirm({
                     title: 'Error',
@@ -331,18 +370,9 @@ function searchResults(query) {
                         }
                     }
                 });
-            } else {
-                setOutput('I hope this helps...');
-                $('#output').append('<div class="bing_results"></div>');
-                for (i = 0; i < results.length; i++) {
-                    if (results[i].className == 'b_algo'){
-                        $('.bing_results').append(results[i]);
-                    }
-                }
-            }
-        },
-        error: function(xhr,error,status){
-            console.log('Error: ' + xhr.status);
+                console.log('error: ' + xhr.status)
+                console.log('description: ' + xhr.error);
+            });
         }
     });
     /*var cors_api_url = 'https://o-lat.herokuapp.com/';
@@ -442,13 +472,36 @@ function response() {
         setOutput("Don't be racist!");
     } else if (srch.indexOf('what') != -1 || srch.indexOf('when') != -1 || srch.indexOf('where') != -1 || srch.indexOf('why') != -1 || 
                 srch.indexOf('how') != -1 || srch.indexOf('who') != -1 || srch.indexOf('?') != -1 || srch.indexOf('do you') != -1 || 
-                srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1) 
+                srch.indexOf('am') != -1 || srch.indexOf('does') != -1 || srch.indexOf('if') != -1 || srch.indexOf('can') != -1) 
                 {
         searchResults($('#srch').val());
     }
     // 18+ Content END
     else {
-        searchResults($('#srch').val());
+        var query = $('#srch').val();
+        setOutput("Sorry, I don't understand. What would you like to do?");
+        $.confirm({
+            title: "I don't understand...",
+            content: "What would you like to do?",
+            escapeKey: 'cancel',
+            type: 'red',
+            icon: 'fas fa-exclamation-triangle',
+            buttons: {
+                confirm: {
+                    text: 'Search the web for &quot' + query + '&quot',
+                    btnClass: 'btn-red',
+                    action: function(){
+                        searchResults(query);
+                    }
+                },
+                cancel: {
+                    text: "Do nothing",
+                    action: function(){
+                        this.close();
+                    }
+                }
+            }
+        });
     }
 }
 
