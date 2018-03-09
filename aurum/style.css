@@ -151,7 +151,7 @@ a, img {
 }
 .ui-menu .ui-menu-item {
     font-size:16px;
-    width:488px;
+    width:484px;
     display:block;
 }
 .menu {
@@ -415,4 +415,49 @@ a, img {
 }
 .clear:focus {
     outline:none;
+}
+@media only screen and (max-width: 870px) {
+    input,
+    textarea,
+    button,
+    select,
+    label,
+    a {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    .menu {
+        display:none;
+    }
+    body {
+        background:grey;
+    }
+    .container_custom {
+        top:unset;
+        bottom:unset;
+        left:unset;
+        right:unset;
+        width:100%;
+        margin:5px 0px 0 0px;
+        padding:0;
+    }
+    .container {
+        width:100%;
+        max-width:unset;
+    }
+    .output {
+        width: 100%;
+    }
+    .search-cont {
+        width:100%;
+        margin:20px 0 0 0;
+    }
+    .ui-autocomplete {
+        width:100% !important;
+        left:unset !important;
+        right:unset !important;
+        bottom:0 !important;
+    }
+    .ui-menu .ui-menu-item {
+        width:100%;
+    }
 }
