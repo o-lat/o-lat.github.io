@@ -417,6 +417,9 @@ a, img {
 .clear:focus {
     outline:none;
 }
+.mobile {
+    display:none;
+}
 @media only screen and (max-width: 870px) {
     input,
     textarea,
@@ -426,14 +429,28 @@ a, img {
     a {
         -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
-    img {
-        display:none;
-    }
     .menu {
         display:none;
     }
+    .mobile {
+        display:block;
+    }
+    .container img {
+        display:none;
+    }
+    .title {
+        background-repeat:no-repeat;
+        background-size:cover;
+        background-image:url(http://i86.photobucket.com/albums/k108/omar_latreche/bg_zpsyfztzjjo.jpg~original);
+        text-align:center;
+        height:112px;
+        -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        padding:15px 0 0px 0;
+    }
     body {
-        background:grey;
+        background:#AAA;
         min-width:unset;
         min-height:unset;
     }
