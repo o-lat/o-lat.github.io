@@ -430,6 +430,8 @@ a, img {
     }
     body {
         background:grey;
+        min-width:unset;
+        min-height:unset;
     }
     .container_custom {
         top:unset;
