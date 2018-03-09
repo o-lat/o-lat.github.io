@@ -425,6 +425,9 @@ a, img {
     a {
         -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
+    img {
+        display:none;
+    }
     .menu {
         display:none;
     }
@@ -439,19 +442,26 @@ a, img {
         left:unset;
         right:unset;
         width:100%;
-        margin:5px 0px 0 0px;
+        margin:3px 0px 0 0px;
         padding:0;
     }
     .container {
-        width:100%;
+        width:calc(100% - 6px);
         max-width:unset;
     }
     .output {
         width: 100%;
+        padding:5px 8px 5px 8px;
+        font-size:18px;
+        margin:0 3px 0 3px;
     }
     .search-cont {
-        width:100%;
+        width:calc(100% + 6px);
         margin:20px 0 0 0;
+    }
+    .search-field {
+        width:calc(100% - 81px);
+        font-size:18px;
     }
     .ui-autocomplete {
         width:100% !important;
