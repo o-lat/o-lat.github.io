@@ -212,9 +212,10 @@ function getResponseRude() {
 }
 function weather(){
     if (navigator.geolocation) {
-        $('#output').html('I need to know where you are to tell you the weather... Please press "Allow"');
+        setOutput('I need to know where you are to tell you the weather... Please press "Allow"');
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
+        setOutput("I'm having trouble detecting your location. What would you like to do?")
         $.confirm({
             title: 'Error',
             content: "Unable to get your location to show the weather. What would you like to do?",
@@ -233,6 +234,7 @@ function weather(){
                     text: "Do nothing",
                     action: function(){
                         this.close();
+                        getWelcome();
                     }
                 }
             }
@@ -252,7 +254,30 @@ function weather(){
                     if (data.results[3] == null || data.results[3].address_components[2].short_name == null || data.results[3].address_components[1].short_name == null ||
                                 data.results[3].address_components[6].long_name == null){
                         console.log(latitude + ' + ' + longitude);
-                        $.alert('Error while retreiving weather for your location');
+                        setOutput("I'm having trouble getting the weather for your location. What would you like to do?");
+                        $.confirm({
+                        title: 'Error',
+                        content: "Unable to retreive weather for your location",
+                        escapeKey: 'cancel',
+                        type: 'red',
+                        icon: 'fas fa-exclamation-triangle',
+                        buttons: {
+                            confirm: {
+                                text: 'Search Google for weather',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    window.open('https://www.google.co.uk/#q=weather', '_blank');
+                                }
+                            },
+                            cancel: {
+                                text: "Do nothing",
+                                action: function(){
+                                    this.close();
+                                    getWelcome();
+                                }
+                            }
+                        }
+                    });
                         self.close();
                     } else {
                         var city_region = data.results[3].address_components[2].short_name + ' ' + data.results[3].address_components[1].short_name;
@@ -271,6 +296,7 @@ function weather(){
                         self.close();
                     }
                 }).fail(function(xhr, status, error) {
+                    setOutput("I'm having trouble detecting your location. What would you like to do?");
                     self.close();
                     $.confirm({
                         title: 'Error',
@@ -290,6 +316,7 @@ function weather(){
                                 text: "Do nothing",
                                 action: function(){
                                     this.close();
+                                    getWelcome();
                                 }
                             }
                         }
@@ -505,6 +532,7 @@ function response() {
                     text: "Do nothing",
                     action: function(){
                         this.close();
+                        getWelcome();
                     }
                 }
             }
