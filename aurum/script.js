@@ -7,11 +7,23 @@
 
 function setOutput(text){
     if ($('.switch :checkbox').is(':checked')) {
-        $('#output').html(text);
-        $('.output').prepend('<p class="flashing">Speaking...</p>');
-        $("div.search-cont > input").prop('disabled', true);
-        $('.search-cont').css('border-left','8px solid #f0ad4e');
-        
+        function notSpeaking(){
+            $('#output').html(text);
+            $('.output').prepend('<p class="flashing">Speaking...</p>');
+            $("div.search-cont > input").prop('disabled', true);
+            $('.search-cont').css('border-left','8px solid #f0ad4e');
+            console.log('started speaking');
+            responsiveVoice.speak(text, "US English Female", {onend:stopSpeaking});
+        }
+        if(responsiveVoice.isPlaying()) {
+            stopSpeaking();
+            responsiveVoice.cancel();
+            if (responsiveVoice.isPlaying() == false){
+                notSpeaking();
+            }
+        } else {
+            notSpeaking();
+        }
         function stopSpeaking() {
             console.log('finshed speaking');
             $('div.output > .flashing').remove();
@@ -19,9 +31,6 @@ function setOutput(text){
             $('.search-cont').css('border-left','8px solid #5cb85c');
             $('#srch').focus();
         }
-        
-        console.log('started speaking');
-        responsiveVoice.speak(text, "US English Female", {onend:stopSpeaking});
         /*
         var msg = new SpeechSynthesisUtterance();
         var voices = window.speechSynthesis.getVoices();
@@ -330,12 +339,13 @@ function searchResults(query) {
                                 text: "Do nothing",
                                 action: function(){
                                     this.close();
+                                    getWelcome();
                                 }
                             }
                         }
                     });
                 } else {
-                    setOutput("Here's some web results I found for &quot;" + '<span class="quote">' + query + '</span>' + "&quot;...");
+                    setOutput("Here's some web results I found for " + '"' + query + '"...');
                     $('#output').append('<div class="bing_results"></div>');
                     for (i = 0; i < results.length; i++) {
                         if (results[i].className == 'b_algo'){
@@ -366,6 +376,7 @@ function searchResults(query) {
                             text: "Do nothing",
                             action: function(){
                                 this.close();
+                                getWelcome();
                             }
                         }
                     }
@@ -405,11 +416,7 @@ function searchResults(query) {
 function response() {
     var srch = $('#srch').val();
     var regex = new RegExp(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-    if (srch == '') {
-        setOutput("How can I help you, if you don't say anything?");
-    } else if (srch.indexOf('time') != -1) {
-        setOutput('The current time according to your computer is ' + moment().format('h:mm A'));
-    } else if (srch.indexOf('joke') != -1 || srch.indexOf('funny') != -1) {
+    if (srch.indexOf('joke') != -1 || srch.indexOf('funny') != -1) {
         getJoke();
     } else if (srch.indexOf('how are you') != -1) {
         setOutput("I'm fine, thanks.");
@@ -560,12 +567,30 @@ $(document).ready(function(){
         });
     });
     
+    $('.search-cont > .clear').click(function(){
+        $('#srch').val('');
+        $('.search-cont > .clear').css('display','none');
+    });
+    
+    $('#srch').keyup(function(){
+        if ($('#srch').val() == ''){
+            $('.search-cont > .clear').css('display','none');
+        } else {
+            $('.search-cont > .clear').css('display','inline-block');
+        }
+    });
+    
     $('#srch').keypress(function(e){
-        if(e.which == 13) {
-            response();
-            getPlaceHolder();
-            $("#srch").val('');
-            $('.ui-autocomplete').css('display','none');
+        if ($('#srch').val() != ''){
+            $('.search-cont > .clear').css('display','inline-block');
+            if(e.which == 13) {
+                response();
+                getPlaceHolder();
+                $('.ui-autocomplete').css('display','none');
+            }
+        }
+        if ($('#srch').val() == ''){
+            $('.search-cont > .clear').css('display','none');
         }
         if ($('#srch').val().length == 45 && $('#output').html() != 'Maximum length reached') {
             setOutput('Maximum length reached');
@@ -573,12 +598,14 @@ $(document).ready(function(){
         }
     });
     $('.go').click(function(){
-        response();
-        getPlaceHolder();
-        $("#srch").val('');
+        if ($('#srch').val() != ''){
+            response();
+            getPlaceHolder();
+        }
     });   
     $('.refresh').click(function(){
         getWelcome();
+        $('#srch').val('');
     });
     
 });
