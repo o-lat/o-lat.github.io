@@ -444,9 +444,6 @@ a, img {
         background-image:url(http://i86.photobucket.com/albums/k108/omar_latreche/bg_zpsyfztzjjo.jpg~original);
         text-align:center;
         height:112px;
-        -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-        -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
         padding:15px 0 0px 0;
     }
     body {
@@ -466,6 +463,7 @@ a, img {
     .container {
         width:calc(100% - 6px);
         max-width:unset;
+        
     }
     .output {
         width: 100%;
