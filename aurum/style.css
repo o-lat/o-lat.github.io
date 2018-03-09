@@ -55,7 +55,7 @@ a, img {
 }
 .search-field {
 	border-radius: 0px;
-    width: 445px;
+    width:calc(100% - 82px);
     height: 41px;
     font-size: 100%;
     outline: none;
@@ -476,7 +476,6 @@ a, img {
         margin:20px 0 0 0;
     }
     .search-field {
-        width:calc(100% - 81px);
         font-size:18px;
         padding-right:24px;
     }
