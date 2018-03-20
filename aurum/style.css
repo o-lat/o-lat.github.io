@@ -7,7 +7,7 @@ body {
 	height:100%;
 	background-repeat:no-repeat;
 	background-size:cover;
-	background-image:url(http://i86.photobucket.com/albums/k108/omar_latreche/bg_zpsyfztzjjo.jpg~original);
+	background-image:url(assets/bg.jpg);
 	min-height:320px;
 	min-width:750px;
 }
