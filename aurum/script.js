@@ -547,6 +547,22 @@ $(document).ready(function(){
     
     if(responsiveVoice.voiceSupport() == true) {
         $('label.switch > input').prop('checked', true);
+		$.confirm({
+            title: "Warning",
+            content: "Voice output is on",
+            escapeKey: 'cancel',
+            type: 'orange',
+            icon: 'fa fa-warning',
+            buttons: {
+                cancel: {
+                    text: "Ok",
+					btnClass: 'btn-orange',
+                    action: function(){
+                        this.close();
+                    }
+                }
+            }
+        });
     } else {
         $('label.switch > input').prop('checked', false);
     }
